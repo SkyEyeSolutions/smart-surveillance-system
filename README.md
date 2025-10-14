@@ -1,7 +1,7 @@
 SkyEyeSolutions: Smart Surveillance System
-Smart Surveillance System is a professional, company-grade solution for video streaming and analysis. Developed by SkyEyeSolutions, this platform provides advanced security features for businesses and organizations requiring reliable surveillance.
+Smart Surveillance System is a professional, company-grade solution for video streaming and analysis. Developed by Pion Tech FZE, this platform provides advanced security features for businesses and organizations requiring reliable surveillance.
 About the Company and Product
-SkyEyeSolutions specializes in the development of innovative security and video surveillance systems. Our Smart Surveillance System allows users to monitor real-time video feeds, detect motion, record events, and efficiently manage multiple camera streams through an intuitive web interface.
+Pion Tech FZE specializes in the development of innovative security and video surveillance systems. Our Smart Surveillance System allows users to monitor real-time video feeds, detect motion, record events, and efficiently manage multiple camera streams through an intuitive web interface.
 
 
 cd smart-surveillance-system

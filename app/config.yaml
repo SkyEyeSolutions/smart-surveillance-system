@@ -7,3 +7,5 @@ cameras:
 settings:
   recording_path: "./recordings"
   log_path: "./logs/events.log"
+  max_storage_mb: 10240
+  alert_email: "admin@example.com"

@@ -1,8 +1,13 @@
-# motion_detector.py
-# Planned module for implementing motion detection algorithms in the Smart Surveillance System.
+motion_detector = MotionDetector(min_area=500)
+recorder = MotionRecorder(camera_source=0)
 
-def detect_motion(frame):
-    # Algorithm will be implemented in the next release.
-    pass
+while True:
+    ret, frame = recorder.camera.read()
+    if not ret:
+        break
+    has_motion, _ = motion_detector.detect(frame)
+    recorder.process_frame(frame, has_motion)
+
+recorder.release()
 
 

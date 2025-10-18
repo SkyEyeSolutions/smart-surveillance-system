@@ -1,1 +1,12 @@
+import cv2
+import datetime
+
+class MotionRecorder:
+    def __init__(self, camera_source=0, output_dir="recordings/", fourcc_str="XVID", fps=20.0):
+        self.camera = cv2.VideoCapture(camera_source)
+        self.output_dir = output_dir
+        self.fourcc = cv2.VideoWriter_fourcc(*fourcc_str)
+        self.fps = fps
+        self.out = None
+        self.recording = False
 

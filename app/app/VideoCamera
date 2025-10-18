@@ -10,3 +10,31 @@ class MotionRecorder:
         self.out = None
         self.recording = False
 
+  def start_recording(self):
+        now = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+        filename = f"{self.output_dir}motion_{now}.avi"
+        width = int(self.camera.get(cv2.CAP_PROP_FRAME_WIDTH))
+        height = int(self.camera.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        self.out = cv2.VideoWriter(filename, self.fourcc, self.fps, (width, height))
+        self.recording = True
+        print(f"[INFO] Started recording: {filename}")
+
+    def stop_recording(self):
+        if self.out:
+            self.out.release()
+            self.recording = False
+            print("[INFO] Stopped recording.")
+
+    def process_frame(self, frame, motion_detected):
+        if motion_detected and not self.recording:
+            self.start_recording()
+        if motion_detected and self.recording:
+            self.out.write(frame)
+        if not motion_detected and self.recording:
+            self.stop_recording()
+
+    def release(self):
+        if self.camera.isOpened():
+            self.camera.release()
+        if self.recording:
+            self.stop_recording()

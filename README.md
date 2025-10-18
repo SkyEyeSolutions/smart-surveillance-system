@@ -15,13 +15,9 @@ A professional, company-grade solution for real-time video streaming and analysi
 - Ability to save captured frames locally
 - Improved error handling and reinitialization logic
 
-## Quick Start
-git clone https://github.com/SkyEyeSolutions/smart-surveillance-system.git 
-cd smart-surveillance-system 
-pip install -r requirements.txt
-python app/web_server.py
 
-Open http://localhost:8080/video_feed in your browser.
+
+
 
 ## Usage Example
 from app.camera import VideoCamera

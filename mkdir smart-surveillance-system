@@ -1,8 +1,15 @@
-from flask import Flask, Response
+from flask import Flask, Response, request, jsonify
 from camera import VideoCamera
 
 app = Flask(__name__)
-camera = VideoCamera(0)  # заміни на RTSP URL, якщо потрібна IP-камера
+
+/video_feed?source=0 або /video_feed?source=rtsp://User:Pass@IP
+cameras = {}
+
+def get_camera(source):
+    if source not in cameras:
+        cameras[source] = VideoCamera(source)
+    return cameras[source]
 
 def gen(camera):
     while True:
@@ -10,11 +17,33 @@ def gen(camera):
         if frame:
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        else:
+            print("[WARNING] Empty frame in generator, check camera.")
+
+@app.route('/')
+def index():
+    return """
+    <h1>Smart Surveillance System</h1>
+    <p>For video stream, go to <a href='/video_feed'>/video_feed</a></p>
+    """
 
 @app.route('/video_feed')
 def video_feed():
+    source = request.args.get('source', '0')  # default webcam
+    camera = get_camera(source)
     return Response(gen(camera),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+@app.route('/snapshot')
+def snapshot():
+    source = request.args.get('source', '0')
+    camera = get_camera(source)
+    success = camera.save_frame()
+    if success:
+        return jsonify({"status": "Frame saved!"})
+    return jsonify({"status": "Error saving frame"}), 500
+
 if __name__ == '__main__':
+    print("[INFO] Starting Smart Surveillance Flask server at http://localhost:8080")
     app.run(host='0.0.0.0', port=8080)
+

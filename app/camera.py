@@ -45,4 +45,4 @@ class VideoCamera:
             filename = f"frame_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
         cv2.imwrite(filename, image)
         print(f"[INFO] Frame saved as {filename}")
-        return True
+      

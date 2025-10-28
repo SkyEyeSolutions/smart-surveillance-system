@@ -33,8 +33,4 @@ class MotionRecorder:
         if not motion_detected and self.recording:
             self.stop_recording()
 
-    def release(self):
-        if self.camera.isOpened():
-            self.camera.release()
-        if self.recording:
-            self.stop_recording()
+ 
